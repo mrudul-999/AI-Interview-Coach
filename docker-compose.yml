@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=interview_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "55433:5432"
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      - DB_NAME=interview_db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+
+volumes:
+  postgres_data:
+
+#This file orchestrates our Django web app and the PostgreSQL database.
+#A docker-compose.yml file is a configuration file that defines and runs multi-container Docker applications.
+#Instead of starting each Docker container manually with long docker run commands, 
+#you describe your entire app's setup in one YAML file, 
+#then bring everything up with a single command.
+
+#https://www.youtube.com/results?search_query=docker+crash+course

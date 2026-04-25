@@ -1,0 +1,12 @@
+# Environment variables (NEVER COMMIT YOUR API KEY)
+.env
+
+# Database files
+db.sqlite3
+
+# Python compiled files
+__pycache__/
+*.pyc
+
+# Mac system files
+.DS_Store
