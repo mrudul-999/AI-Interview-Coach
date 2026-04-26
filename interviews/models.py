@@ -15,7 +15,7 @@ class InterviewSession(models.Model):
     job_role_name = models.CharField(max_length=255)
     job_skills_needed = models.TextField(blank=True)
     
-    # Metadata
+    # Metadata          
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

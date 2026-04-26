@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview Coach</title>
+    
+    <!-- Modern Typography: Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Our Premium CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <!-- HTMX: The magic library for frontend reactivity without React -->
+    <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🎯 AI Interview Coach</div>
+        <div class="nav-links">
+            <a href="/">Dashboard</a>
+            <!-- We will hook up logout later -->
+            <a href="#">Logout</a>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <!-- Everything inside this block gets swapped dynamically! -->
+        {% block content %}
+        {% endblock content %}
+    </main>
+</body>
+</html>

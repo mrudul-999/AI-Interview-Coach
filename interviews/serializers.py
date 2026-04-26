@@ -15,7 +15,7 @@ class InterviewSessionSerializer(serializers.ModelSerializer):
         read_only_fields = ['candidate']
 
 from django.contrib.auth.models import User
-
+        
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 

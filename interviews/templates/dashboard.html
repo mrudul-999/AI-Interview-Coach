@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="glass-card">
+    <h1>Welcome to your AI Coach</h1>
+    <p>Prepare for your next big role with hyper-realistic, AI-generated interview questions 
+        tailored to your resume.</p>
+    
+    <br>
+    
+    <h2>Start a New Interview</h2>
+    <!-- We will hook up this form to HTMX later! -->
+       <!-- HTMX Magic: 
+         hx-post: Sends the form data to our new URL
+         hx-target: Replaces the entire '.container' box with the result
+         hx-indicator: Shows the loading text while Gemini is thinking! -->
+    <form hx-post="{% url 'start-interview' %}" 
+          hx-target=".container" 
+          hx-indicator="#loading">
+        
+        <!-- Django Security token required for all forms -->
+        {% csrf_token %}
+        
+        <label for="role">Target Job Role</label>
+        <input type="text" id="role" name="job_role_name" placeholder="e.g., Senior Python Developer" required>
+        
+        <label for="skills">Key Skills Required</label>
+        <textarea id="skills" name="job_skills_needed" rows="3" placeholder="e.g., Django, Docker, PostgreSQL" required></textarea>
+        
+        <button type="submit" class="btn-primary">Generate Interview</button>
+    </form>
+
+    <!-- This div is completely invisible until HTMX triggers it! -->
+    <div id="loading" class="htmx-indicator" style="text-align: center; margin-top: 2rem;">
+        <h3 style="color: var(--accent);">🤖 Gemini is analyzing your profile and generating questions... Please wait.</h3>
+    </div>
+
+</div>
+{% endblock content %}

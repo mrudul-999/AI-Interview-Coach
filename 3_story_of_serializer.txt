@@ -1,0 +1,44 @@
+Edited story_of_models.txt
+Viewed 2_story_of_models.txt:17-41
+
+### 📖 Chapter 3: The Customs Officer (Serializers)
+
+With the Postgres Reactor safely storing all of his data, Dr. Django was ready to share his Interview Coach with the rest of the galaxy. 
+
+He received an incoming transmission from the Outer Rim—a web browser representing a candidate. 
+*"Send me my Interview Session,"* the browser demanded. 
+
+Django confidently grabbed the `InterviewSession` Python Object from the Postgres Reactor and tried to throw it through the communication portal. 
+
+*BZZZT!* The portal rejected it. 
+
+"What's wrong?" Django asked.
+
+"Browsers are simple creatures," his assistant replied. "They don't understand complex Python objects. They don't know what a Class is, or what a Model is. They only speak one universal, lightweight trade language: **JSON**."
+
+Django sighed. JSON was just plain text—simple key-value pairs wrapped in curly braces. If he wanted to talk to the browser, he had to manually disassemble his beautiful Python object, turn every single piece of data into text, and build a JSON dictionary by hand. It would take hours for every single request.
+
+Enter the **Serializer**. 
+
+The Serializer was the ultimate Customs Officer. She stood directly at the border between Django's Engine and the outside universe.
+
+"Don't worry, Doc. I speak fluent Python *and* fluent JSON," the Serializer said, adjusting her glasses. 
+
+When the browser requested the session, Django handed his heavy Python object to the Serializer. In a fraction of a second, she stripped away all the complex Python armor, extracted just the data (the ID, the job role, the candidate skills), and neatly packed them into a lightweight JSON box. 
+
+```json
+{
+  "id": 1,
+  "job_role_name": "Software Engineer"
+}
+```
+She tossed the JSON box through the portal. The browser caught it instantly and displayed it perfectly on the candidate's screen.
+
+"That's incredible," Django said. "But what happens when the candidate types an answer and sends it *back* to us?"
+
+"I handle that too," the Serializer smirked. "When the browser throws a JSON box back through the portal, I catch it. But I don't just hand it to you. I am Customs. I inspect the box. I make sure they didn't send a blank answer, or malicious data. If it passes my inspection—`serializer.is_valid()`—I instantly forge a brand-new Python object out of that raw JSON text, so you can safely hand it to the Postgres Reactor."
+
+The border was secure. Django never had to speak JSON again.
+
+---
+**Let me know when you are ready for Chapter 4: The Brain in the Jar (Services)!**

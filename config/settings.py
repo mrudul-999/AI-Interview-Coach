@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@c!p3*t_(q57+vj1j(-@a^s%m*27t90q7h8$z-kch!l2)qh6*=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'interviews',
     'rest_framework',
 ]
-
+          
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

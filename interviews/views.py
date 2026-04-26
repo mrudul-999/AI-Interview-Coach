@@ -91,3 +91,53 @@ class LoginView(APIView):
             return Response({"message": f"Welcome back, {user.username}!"})
         else:
             return Response({"error": "Invalid username or password"}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+from django.shortcuts import render
+
+def dashboard_view(request):
+    return render(request, 'dashboard.html')
+
+from .models import InterviewSession, InterviewQuestion
+from .services import generate_interview_questions
+
+def start_interview_view(request):
+    if request.method == "POST":
+        role = request.POST.get('job_role_name')
+        skills = request.POST.get('job_skills_needed')
+        
+        # 1. Create Session
+        from django.contrib.auth.models import User
+        user = User.objects.first() # Still using hardcoded user for now
+        session = InterviewSession.objects.create(candidate=user, job_role_name=role, job_skills_needed=skills)
+        
+        # 2. Ask Gemini
+        ai_questions = generate_interview_questions(role, skills)
+        
+        # 3. Save Questions
+        for q_text in ai_questions:
+            InterviewQuestion.objects.create(session=session, question_text=q_text, category="AI Generated")
+            
+        # 4. Return the new HTML Arena!
+        return render(request, 'interview_arena.html', {'session': session})
+
+
+from django.shortcuts import get_object_or_404
+from .services import evaluate_answer
+
+def submit_answer_html(request, question_id):
+    if request.method == "POST":
+        question = get_object_or_404(InterviewQuestion, id=question_id)
+        user_answer = request.POST.get('answer')
+        
+        # 1. Ask Gemini to grade it
+        score, feedback = evaluate_answer(question.question_text, user_answer)
+        
+        # 2. Save to database
+        question.user_answer = user_answer
+        question.score = score
+        question.ai_feedback = feedback
+        question.save()
+        
+        # 3. Return the feedback HTML!
+        return render(request, 'partials/feedback.html', {'question': question})

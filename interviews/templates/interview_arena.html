@@ -1,0 +1,31 @@
+<div class="glass-card">
+    <h1>Interview: {{ session.job_role_name }}</h1>
+    <p>We've analyzed your profile and generated 3 questions. Good luck!</p>
+</div>
+
+<div style="margin-top: 2rem;">
+    <!-- Django will loop through all 3 questions and create a card for each -->
+    {% for question in session.questions.all %}
+        
+        <!-- We give each box a unique ID so HTMX knows exactly which box to update later -->
+        <div class="glass-card" id="question-box-{{ question.id }}" style="margin-bottom: 2rem;">
+            <h3 style="color: var(--accent);">Question {{ forloop.counter }}</h3>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">{{ question.question_text }}</p>
+            
+            <!-- HTMX Form to submit the answer. Notice how the target is JUST this specific question box! -->
+            <form hx-post="{% url 'submit-answer-html' question.id %}" 
+                  hx-target="#question-box-{{ question.id }}"
+                  hx-indicator="#grading-{{ question.id }}"
+                  style="margin-top: 1.5rem;">
+                {% csrf_token %}
+                <textarea name="answer" rows="4" placeholder="Type your answer here..." required></textarea>
+                <button type="submit" class="btn-primary">Submit for Grading</button>
+            </form>
+
+            <div id="grading-{{ question.id }}" class="htmx-indicator" style="margin-top: 1rem;">
+                <p style="color: #a855f7;">🤖 Grading your answer...</p>
+            </div>
+        </div>
+        
+    {% endfor %}
+</div>

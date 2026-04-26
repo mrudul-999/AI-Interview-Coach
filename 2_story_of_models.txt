@@ -1,0 +1,41 @@
+Viewed story_of_docker.txt:18-45
+Edited story_of_docker.txt
+
+### 📖 Chapter 2: The Universal Translator (ORM)
+
+With the Engine humming safely inside its Docker containment field on Mars, Dr. Django faced his next catastrophic problem. 
+
+The Engine needed to store its memories—user profiles, interview sessions, and generated questions. To do this, it had to send the data into the massive, glowing Postgres Reactor. 
+
+But there was a terrifying barrier: The Reactor didn't speak Python. 
+
+The Reactor only understood an ancient, rigid, and highly volatile dialect known as **SQL**. 
+*"SELECT asterisk FROM table WHERE condition,"* the Reactor demanded coldly. 
+
+Django tried to learn SQL, but it was treacherous. If he made a single typo—forgetting a quotation mark or misplacing a comma—the Reactor would misinterpret the command and could violently wipe all the memories it was holding. It was too risky. He couldn't manually hand-write SQL for every single piece of data he wanted to save.
+
+He needed a translator. 
+
+He installed a sleek cybernetic implant into the Engine called the **ORM** (Object-Relational Mapper).
+
+"How does it work?" Django asked the ORM engineer.
+
+"Simple," the engineer replied. "You never speak SQL again. You just speak your native language: Python."
+
+The engineer opened a blueprint called `models.py`. 
+"If you want to create a blueprint for an Interview Session, you just write a Python Class. You say: *'I want a session, and it has a candidate, and a job role'* in pure Python."
+
+Django looked at the screen. 
+```python
+class InterviewSession:
+    job_role_name = models.CharField()
+```
+"And the Reactor understands this?" Django asked skeptically.
+
+"No," the engineer smiled. "The Reactor has no idea what a Python Class is. But when you run the command `makemigrations`, the ORM looks at your Python Class, analyzes it, and creates a flawless, perfectly constructed set of SQL commands. When you run `migrate`, the ORM walks over to the Reactor and speaks those perfect SQL commands for you, building the exact tables you need."
+
+"What if I want to fetch a memory?" Django asked. 
+
+"You just ask the ORM in Python: `InterviewSession.objects.first()`. The ORM instantly translates that thought into `SELECT * FROM interview_sessions LIMIT 1`, grabs the raw data from the Reactor, and hands it back to you disguised as a friendly Python object."
+
+Django leaned back in his chair. He had total control over the mighty Postgres Reactor, and he never had to speak a single word of its terrifying language again.

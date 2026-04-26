@@ -1,0 +1,32 @@
+Edited 3_story_of_serializer.txt
+Viewed 3_story_of_serializer.txt:17-44
+
+### 📖 Chapter 4: The Brain in the Jar (Services)
+
+Dr. Django’s Engine was working perfectly. The data was flowing, the Serializer was stamping passports, and the Postgres Reactor was happy. But the Engine was... dumb. It could store data, but it couldn't *think*. 
+
+To become the ultimate Interview Coach, Django needed an intelligence far beyond his own. He acquired a powerful, pulsating artifact from a distant galaxy: **The Gemini Brain**.
+
+He carefully placed the glowing Brain in a high-tech glass jar. 
+
+"I'll wire it directly into my main Control Room," Django decided, pointing to a blueprint labeled `views.py`. "When a candidate asks for an interview, my Control Room will personally talk to the Brain, wait for it to think, translate its alien thoughts, and then save them."
+
+"Doc, wait!" his assistant shouted, stepping in front of the blueprint. "You can't put the Brain in the `views.py` Control Room! That's a terrible idea!"
+
+"Why?" Django asked.
+
+"The Control Room is the busiest place in the Engine! It's managing thousands of incoming browser requests. If the Gemini Brain takes three seconds to think of a question, your entire Control Room will freeze for three seconds waiting for it. Furthermore, the Brain is messy. It requires secret API Keys, complex Prompt Engineering, and error handling. If you stuff all that into your `views.py`, the Control Room will become a bloated, tangled nightmare."
+
+Django paused. "You're right. And what if Google shuts down the Gemini Brain tomorrow, and we have to buy an OpenAI Brain instead? I'd have to rip apart the entire Control Room just to replace it."
+
+"Exactly," the assistant said. "That is why we use the **Service Layer**."
+
+The assistant drew a new blueprint: `services.py`. 
+
+"We put the Brain in the Jar in a completely isolated, soundproof wing of the facility called the Service Layer," the assistant explained. "The Control Room (`views.py`) doesn't even know the Brain exists. When the Control Room needs questions, it just sends a quick, simple memo down the hall: *'Hey Services, get me 3 Python questions.'*"
+
+In the Service wing, a dedicated handler (`generate_interview_questions`) takes the memo. The handler carefully crafts the complex prompt, unlocks the safe to get the `GEMINI_API_KEY`, talks to the glowing Brain in the Jar, waits for the answer, and formats it neatly into a Python list. 
+
+The handler then sends the clean list back up to the Control Room. 
+
+"Beautiful," Django whispered. "The Control Room stays thin, fast, and organized. And if I ever want to replace the Gemini Brain with an OpenAI Brain, I just swap the jar in the basement. The Control Room will never even notice the difference."
