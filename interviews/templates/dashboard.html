@@ -7,6 +7,20 @@
         tailored to your resume.</p>
     
     <br>
+        {% if past_sessions %}
+        <h2>Your Past Interviews</h2>
+        <div style="display: grid; gap: 1rem; margin-bottom: 3rem;">
+            {% for session in past_sessions %}
+                <div class="glass-card" style="padding: 1.5rem;">
+                    <h3 style="color: var(--accent);">{{ session.job_role_name }}</h3>
+                    <p style="font-size: 0.9rem;">Date: {{ session.created_at|date:"F j, Y" }}</p>
+                    <p style="font-size: 0.9rem;">Questions Generated: {{ session.questions.count }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <hr style="border-color: var(--glass-border); margin-bottom: 2rem;">
+    {% endif %}
+
     
     <h2>Start a New Interview</h2>
     <!-- We will hook up this form to HTMX later! -->

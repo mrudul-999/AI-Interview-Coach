@@ -98,7 +98,9 @@ from django.shortcuts import render
 
 @login_required
 def dashboard_view(request):
-    return render(request, 'dashboard.html')
+    past_sessions = InterviewSession.objects.filter(candidate=request.user).order_by('-created_at')
+    return render(request, 'dashboard.html', {'past_sessions': past_sessions})
+
 
 from .models import InterviewSession, InterviewQuestion
 from .services import generate_interview_questions
