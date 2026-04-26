@@ -20,8 +20,10 @@
         <div class="logo">🎯 AI Interview Coach</div>
         <div class="nav-links">
             <a href="/">Dashboard</a>
-            <!-- We will hook up logout later -->
-            <a href="#">Logout</a>
+            <form action="{% url 'logout-page' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="background: none; border: none; color: white; cursor: pointer; font-weight: 600; margin-left: 1.5rem;">Logout</button>
+            </form>
         </div>
     </nav>
     

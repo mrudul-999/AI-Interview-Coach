@@ -4,6 +4,7 @@ from rest_framework import status
 from .serializers import InterviewSessionSerializer
 from .services import generate_interview_questions
 from .models import InterviewQuestion
+from django.contrib.auth.decorators import login_required
 
 class StartSessionView(APIView):
     def post(self, request):
@@ -95,20 +96,21 @@ class LoginView(APIView):
 
 from django.shortcuts import render
 
+@login_required
 def dashboard_view(request):
     return render(request, 'dashboard.html')
 
 from .models import InterviewSession, InterviewQuestion
 from .services import generate_interview_questions
 
+@login_required
 def start_interview_view(request):
     if request.method == "POST":
         role = request.POST.get('job_role_name')
         skills = request.POST.get('job_skills_needed')
         
         # 1. Create Session
-        from django.contrib.auth.models import User
-        user = User.objects.first() # Still using hardcoded user for now
+        user = request.user 
         session = InterviewSession.objects.create(candidate=user, job_role_name=role, job_skills_needed=skills)
         
         # 2. Ask Gemini
